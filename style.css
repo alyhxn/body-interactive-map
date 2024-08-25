@@ -1,3 +1,9 @@
+:root{
+  --color-1: #b4e4fd;
+  --color-2: #b3e2ff;
+  --color-3: #00a6ad;
+  --color-4: #beb2d7;
+}
 *{
   box-sizing: border-box;
 }
@@ -5,6 +11,10 @@ body{
   display: flex;
   justify-content: space-between;
   margin: 0;
+  height: 100vh;
+}
+body > *{
+  width: 50%;
 }
 ::-webkit-scrollbar {
   width: 8px;
@@ -24,7 +34,6 @@ body{
 main{
   display: flex;
   flex-direction: column;
-  width: 50%;
 }
 section{
   display: flex;
@@ -35,15 +44,16 @@ section{
   height: 50%;
   width: 100%;
   padding: 20px 30px;
-  background-color: #b4e4fd;
+  background-color: var(--color-1);
 }
 textarea{
   width: 100%;
   height: 100%;
+  min-height: 300px;
   resize: none;
 }
 .cards{
-  background-color: #b3e2ff;
+  background-color: var(--color-2);
   display: flex;
   gap: 20px;
   overflow-x: scroll;
@@ -53,7 +63,7 @@ textarea{
   border-radius: 5px;
 }
 .card{
-  background-color: #00a6ad;
+  background-color: var(--color-3);
   padding: 15px;
   border-radius: 5px;
   box-shadow: 0px 0px 10px -1px;
@@ -70,13 +80,22 @@ textarea{
   line-height: 1.5em;
 }
 .history{
-  background-color: #beb2d7;
+  background-color: var(--color-4);
 }
 svg{
-  width: 50%;
   height: 96vh;
 }
 rect:hover, path:hover,
 rect.on, path.on{
   fill: blue;
+}
+
+@media (max-width: 700px) {
+  body{
+    flex-direction: column-reverse;
+    height: fit-content;
+  }
+  body > *{
+    width: 100%;
+  }
 }
