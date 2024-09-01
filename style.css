@@ -300,8 +300,6 @@ rect.on, path.on, polygon.on{
     font-size: 12px;
   }
 }
-
-
 @media (hover: hover) {
   rect:hover, path:hover, polygon:hover{
     fill: #707070;
