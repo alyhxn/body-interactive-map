@@ -119,19 +119,20 @@ function onadd () {
     }
   }
   const svg_id = svgx.id
+  const el_id = elx.id
   if(data[svg_id][elx.id])
-    var el = history.querySelector('#a'+elx.id)
+    var el = history.querySelector('#'+svg_id+el_id)
   else{
     var el = document.createElement('div')
     el.classList.add('card')
     elx.classList.add('add')
     el.tabIndex = '-1'
-    el.id = 'a'+elx.id
+    el.id = svg_id+el_id
     cards.append(el)
   }
-  data[svg_id][elx.id] = input.value
+  data[svg_id][el_id] = input.value
   el.innerHTML = `
-    <h3>${svg_id} ${elx.id}</h3>
+    <h3>${svg_id} ${el_id}</h3>
     <div>${input.value}</div>
     <button>Edit</button>
   `
@@ -141,7 +142,7 @@ function onadd () {
     const child = svg_box.querySelector('#'+svg_id)
     const index = Array.prototype.indexOf.call(svg_box.children, child);
     dots[index].click()
-    const target = svg_box.querySelector('#'+el.id.slice(1))
+    const target = svg_box.querySelector('#'+svg_id+' #'+el_id)
     const event = new MouseEvent('click', {
       bubbles: true,
       cancelable: true,
@@ -157,5 +158,5 @@ function onadd () {
   // submit.scrollIntoView()
 }
 function onsubmit () {
-  console.log('send email! '+JSON.stringify(data))
+  console.log('send email:\n'+JSON.stringify(data, null, 2))
 }
