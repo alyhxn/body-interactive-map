@@ -11,12 +11,10 @@ body{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 20px;
   margin: 0 auto;
   height: 100vh;
-  border-left: 1px solid gray;
-  border-right: 1px solid gray;
   max-width: 1600px;
 }
 h2, h3, h4{
@@ -89,6 +87,7 @@ button#add:hover{
   background-color: #F3F3F3;
   display: block;
   overflow-x: scroll;
+  border-left: 1px solid #3E75FF;
 }
 .history > h2{
   margin-top: 8px;
@@ -241,9 +240,11 @@ rect.on, path.on, polygon.on{
     width: 100vw;
     height: 100vh;
     z-index: 1;
+    justify-content: flex-start;
     background-color: white;
     top: 0;
     left: 0;
+    border: none;
   }
   button{
     font-size: 12px;
@@ -255,9 +256,13 @@ rect.on, path.on, polygon.on{
   }
   #close{
     display: block;
+    position: absolute;
+    bottom: 0;
     background-color: #D73836;
     color: white;
     margin-top: auto;
+    margin: 10px;
+    width: 95%;
   }
   .slider h4.left{
     top: 4vh;
