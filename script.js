@@ -1,3 +1,4 @@
+//Init
 let elx, svgx, dotx, data
 const input = document.querySelector('textarea')
 const add = document.querySelector('button')
@@ -12,20 +13,18 @@ const dot_box = document.querySelector('.dots')
 const dots = document.querySelectorAll('.dot')
 const cards_btn = document.querySelector('button#show_cards')
 const close_btn = document.querySelector('button#close')
-
 dotx = dot_box.firstElementChild
-
 const files = ['assets/front-split.svg', 'assets/back-split.svg', 'assets/right-split.svg', 'assets/left-split.svg']
+
+//fetch svgs
 files.forEach((file, i) => {
   fetch(file).then(response => response.text())
   .then(text => {
     const temp = document.createElement('div')
     temp.innerHTML = text
     svg_box.append(temp.firstElementChild)
-    if(!i){
+    if(!i)
       svgx = svg_box.firstElementChild
-    }
-    
     const paths = svg_box.lastElementChild.querySelectorAll('path')
     const rects = svg_box.lastElementChild.querySelectorAll('rect')
     const polygons = svg_box.lastElementChild.querySelectorAll('polygons')
@@ -35,22 +34,18 @@ files.forEach((file, i) => {
   })
 })
 
-
+//listeners
 add.onclick = onadd
-input.onkeydown = e => {
-  if(e.key === 'Enter')
-    onadd()
-}
-
-cards_btn.onclick = () => {
-  history.classList.add('show')
-}
-close_btn.onclick = () => {
-  history.classList.remove('show')
-}
+input.onkeydown = e => {e.key === 'Enter' && onadd()}
+cards_btn.onclick = () => history.classList.add('show')
+close_btn.onclick = () => history.classList.remove('show')
 // submit.onclick = onsubmit
 dots.forEach(dot_click)
+r8_btn.onclick = r8_click
+l8_btn.onclick = l8_click
 
+
+//functions
 function dot_click (dot, i) {
   dot.onclick = () => {
     svgx.classList.remove('show')
@@ -62,7 +57,7 @@ function dot_click (dot, i) {
     dotx.classList.add('on')
   }
 }
-r8_btn.onclick = () => {
+function r8_click () {
   svgx.classList.remove('show')
   dotx.classList.remove('on')
   if(svgx.nextElementSibling){
@@ -73,11 +68,11 @@ r8_btn.onclick = () => {
     svgx = svg_box.firstElementChild
     dotx = dot_box.firstElementChild
   }
-  title.innerHTML = svgx.id
+  title.innerHTML = 'Body ' + svgx.id
   svgx.classList.add('show')
   dotx.classList.add('on')
 }
-l8_btn.onclick = () => {
+function l8_click () {
   svgx.classList.remove('show')
   dotx.classList.remove('on')
   console.log(svgx)
@@ -94,8 +89,6 @@ l8_btn.onclick = () => {
   svgx.classList.add('show')
   dotx.classList.add('on')
 }
-
-
 function click (el) {
   el.onclick = () => {
     elx && elx.classList.remove('on')
@@ -110,7 +103,6 @@ function click (el) {
     }
   }
 }
-
 function onadd () {
   if(!input.value)
     return
@@ -129,12 +121,13 @@ function onadd () {
     var el = document.createElement('div')
     el.classList.add('card')
     elx.classList.add('add')
+    el.tabIndex = '-1'
     el.id = 'a'+elx.id
     cards.append(el)
   }
   data[svgx.id][elx.id] = input.value
   el.innerHTML = `
-    <h2>${svgx.id} ${elx.id}</h2>
+    <h3>${svgx.id} ${elx.id}</h3>
     <div>${input.value}</div>
     <button>Edit</button>
   `
@@ -156,7 +149,6 @@ function onadd () {
   input.placeholder = 'Pick a body part to add symptoms'
   // submit.scrollIntoView()
 }
-
 function onsubmit () {
-  console.log('send email!')
+  console.log('send email!'+data)
 }

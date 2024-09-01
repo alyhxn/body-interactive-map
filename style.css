@@ -12,11 +12,16 @@ body{
   flex-direction: column;
   justify-content: space-between;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 20px;
   margin: 0 auto;
   height: 100vh;
   border-left: 1px solid gray;
   border-right: 1px solid gray;
   max-width: 1600px;
+}
+h2, h3, h4{
+  font-weight: 400;
+  color: #383838;
 }
 ::-webkit-scrollbar {
   width: 8px;
@@ -56,33 +61,74 @@ textarea{
   border: none;
   resize: none;
   background-color: white;
+  font-size: 16px;
+}
+button{
+  width: 100%;
+  height: 40px;
+  font-size: 14px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0px 0px 6px -1px black;
+  background-color: white;
+}
+button:hover{
+  background-color: gray;
 }
 button#add{
   background-color: #3566CF;
-  color: white
+  color: white;
+  height: 100%;
+  max-height: 40px;
 }
 button#add:hover{
   background-color: #457ffd;
 }
-section.history{
+.history{
   background-color: #F3F3F3;
-  justify-content: flex-start;
+  display: block;
+  overflow-x: scroll;
+}
+.history > h2{
+  margin-top: 8px;
+  margin-bottom: 8px;
+  font-size: 24px;
 }
 .cards{
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  overflow-x: hidden;
-  width: 96%;
+  width: 100%;
   height: fit-content;
+  font-size: 12px;
+}
+.cards > h3{
+  margin: 20px auto;
+  color: gray;
 }
 .card{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   padding: 15px;
   border-radius: 5px;
   background-color: white;
-  border: 1px solid rgb(170, 170, 170);
+  border: 1px solid #BABABA;
   flex-grow: 1;
-  min-width: 200px;
+  gap: 5px;
+  min-width: 160px;
+  max-width: 300px;
+  width: min-content;
+}
+.card > h3{
+  margin: 5px 0 0 0;
+  color: black;
+  font-size: 14px;
+}
+.card:hover,
+.card:focus{
+  border-color: #3E75FF;
 }
 .card > div{
   display: -webkit-box;
@@ -90,27 +136,33 @@ section.history{
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  height: 4.5em;
+  max-height: 4.5em;
   line-height: 1.5em;
 }
 .card > button{
-  background-color: #CFCFCF;
-  margin-top: 10px;
+  background-color: #E4E4E4;
+  margin-top: auto;
+  font-size: 10px;
+  height: 30px;
+}
+.card > button:hover{
+  background-color: white;
 }
 .slider{
   background-color: #F3F3F3;
   height: 70vh;
+  gap: 10px;
   position: relative;
   padding: 15px 0;
 }
 .slider h4.left{
   position: absolute;
-  top: 20vh;
+  top: 10vh;
   left: 30%;
 }
 .slider h4.right{
   position: absolute;
-  top: 20vh;
+  top: 10vh;
   right: 30%;
 }
 .slider h4{
@@ -124,22 +176,18 @@ section.history{
   width: fit-content;
   background-color: #fff;
   border: 1px solid gray;
-  padding: 20px;
+  padding: 16px;
   cursor: pointer;
+  box-shadow: 0px 0px 6px -1px black;
+}
+.slider img:hover{
+  background-color: #e4e4e4;
 }
 .slider img.right{
   right: 5vw;
 }
 .slider img.left{
   left: 5vw;
-}
-button{
-  width: 100%;
-  height: 40px;
-  cursor: pointer;
-  border: none;
-  box-shadow: 0px 0px 6px -1px;
-  background-color: white;
 }
 .svg_box{
   overflow: hidden;
@@ -157,8 +205,8 @@ svg.show{
 }
 .dot {
   cursor: pointer;
-  height: 15px;
-  width: 15px;
+  height: 14px;
+  width: 14px;
   margin: 0 2px;
   background-color: #bbbbbb;
   border-radius: 50%;
@@ -197,6 +245,9 @@ rect.on, path.on, polygon.on{
     top: 0;
     left: 0;
   }
+  button{
+    font-size: 12px;
+  }
   #show_cards{
     display: block;
     color: #3566CF;
@@ -209,9 +260,33 @@ rect.on, path.on, polygon.on{
     margin-top: auto;
   }
   .slider h4.left{
+    top: 4vh;
     left: 10%;
   }
   .slider h4.right{
+    top: 4vh;
     right: 10%;
+  }
+  .slider .svg_box{
+    margin-top: 20px;
+  }
+  .slider .title{
+    display: none;
+  }
+  .slider img{
+    width: 38px;
+    height: 38px;
+    padding: 5px;
+  }
+  .cards{
+    flex-direction: column;
+    font-size: 8px;
+  }
+  .card{
+    max-width: none;
+    width: 100%;
+  }
+  .cards h3{
+    font-size: 12px;
   }
 }
