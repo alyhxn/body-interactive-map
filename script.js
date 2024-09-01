@@ -27,7 +27,7 @@ files.forEach((file, i) => {
       svgx = svg_box.firstElementChild
     const paths = svg_box.lastElementChild.querySelectorAll('path')
     const rects = svg_box.lastElementChild.querySelectorAll('rect')
-    const polygons = svg_box.lastElementChild.querySelectorAll('polygons')
+    const polygons = svg_box.lastElementChild.querySelectorAll('polygon')
     paths.forEach(click)
     rects.forEach(click)
     polygons.forEach(click)
