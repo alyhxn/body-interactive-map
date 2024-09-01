@@ -93,7 +93,11 @@ function click (el) {
     if(elx !== el){
       el.classList.add('on')
       elx = el
-      input.value = el.classList.contains('add') ? data[svgx.id][elx.id] : ''
+      input.value = ''
+      if(el.classList.contains('add')){
+        input.value =  data[svgx.id][elx.id]
+        add.innerHTML = 'update'
+      }
       input.disabled = false
       input.focus()
       input.placeholder = 'Enter symptoms here'
@@ -104,6 +108,7 @@ function click (el) {
 function onadd () {
   if(!input.value)
     return
+  add.innerHTML = 'add'
   if(!data){
     cards.innerHTML = ''
     data = {

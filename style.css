@@ -47,7 +47,7 @@ section{
   justify-content: center;
   height: 100%;
   width: 100%;
-  padding: 15px 15px;
+  padding: 10px;
   border: 1px solid rgb(163, 163, 163);
 }
 textarea{
@@ -59,7 +59,8 @@ textarea{
   border: none;
   resize: none;
   background-color: white;
-  font-size: 16px;
+  font-size: 14px;
+  padding: 10px;
 }
 button{
   width: 100%;
@@ -87,6 +88,7 @@ button#add:hover{
   background-color: #F3F3F3;
   display: block;
   overflow-x: scroll;
+  padding: 20px;
   border-left: 1px solid #3E75FF;
 }
 .history > h2{
@@ -100,7 +102,7 @@ button#add:hover{
   gap: 20px;
   width: 100%;
   height: fit-content;
-  font-size: 12px;
+  font-size: 11px;
 }
 .cards > h3{
   margin: 20px auto;
@@ -141,8 +143,9 @@ button#add:hover{
 .card > button{
   background-color: #E4E4E4;
   margin-top: auto;
-  font-size: 10px;
-  height: 30px;
+  font-size: 11px;
+  height: 25px;
+  box-shadow: 0px 0px 3px -1px black;
 }
 .card > button:hover{
   background-color: white;
@@ -240,11 +243,15 @@ rect.on, path.on, polygon.on{
     width: 100vw;
     height: 100vh;
     z-index: 1;
+    align-items: flex-start;
     justify-content: flex-start;
     background-color: white;
     top: 0;
     left: 0;
     border: none;
+  }
+  textarea{
+    padding: 0;
   }
   button{
     font-size: 12px;
@@ -256,13 +263,14 @@ rect.on, path.on, polygon.on{
   }
   #close{
     display: block;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     background-color: #D73836;
     color: white;
     margin-top: auto;
     margin: 10px;
     width: 95%;
+    left: 0;
   }
   .slider h4.left{
     top: 4vh;
@@ -285,7 +293,7 @@ rect.on, path.on, polygon.on{
   }
   .cards{
     flex-direction: column;
-    font-size: 8px;
+    font-size: 10px;
   }
   .card{
     max-width: none;
