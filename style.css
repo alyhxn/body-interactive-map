@@ -87,12 +87,34 @@ button#add:hover{
 .history{
   background-color: #F3F3F3;
   display: block;
-  overflow-x: scroll;
-  padding: 20px;
+  padding: 0;
+  position: relative;
   border-left: 1px solid #3E75FF;
 }
-.history > h2{
-  margin-top: 8px;
+.history .box{
+  padding: 20px;
+  height: 100%;
+  width: 100%;
+  overflow-x: scroll;
+  padding-bottom: 55px;
+}
+.history .fixed{
+  position: absolute;
+  width: 100%;
+  padding: 10px;
+  bottom: 0;
+  display: flex;
+  gap: 10px;
+}
+.history #submit{
+  background-color: rgb(47, 100, 47);
+  color: white;
+}
+.history #submit:hover{
+  background-color: rgb(61, 139, 61);
+}
+.history h2{
+  margin-top: 2px;
   margin-bottom: 8px;
   font-size: 24px;
 }
@@ -260,14 +282,8 @@ rect.on, path.on, polygon.on{
   }
   #close{
     display: block;
-    position: fixed;
-    bottom: 0;
     background-color: #D73836;
     color: white;
-    margin-top: auto;
-    margin: 10px;
-    width: 95%;
-    left: 0;
   }
   .slider h4.left{
     top: 4vh;

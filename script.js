@@ -4,7 +4,7 @@ const input = document.querySelector('textarea')
 const add = document.querySelector('button')
 const history = document.querySelector('.history')
 const cards = document.querySelector('.cards')
-// const submit = document.querySelector('#submit')
+const submit = document.querySelector('#submit')
 const title = document.querySelector('.slider .title')
 const svg_box = document.querySelector('.svg_box')
 const r8_btn = document.querySelector('img.right')
@@ -39,7 +39,7 @@ add.onclick = onadd
 input.onkeydown = e => {e.key === 'Enter' && onadd()}
 cards_btn.onclick = () => history.classList.add('show')
 close_btn.onclick = () => history.classList.remove('show')
-// submit.onclick = onsubmit
+submit.onclick = onsubmit
 dots.forEach(dot_click)
 r8_btn.onclick = r8_click
 l8_btn.onclick = l8_click
@@ -118,7 +118,8 @@ function onadd () {
       left: {}
     }
   }
-  if(data[svgx.id][elx.id])
+  const svg_id = svgx.id
+  if(data[svg_id][elx.id])
     var el = history.querySelector('#a'+elx.id)
   else{
     var el = document.createElement('div')
@@ -128,15 +129,18 @@ function onadd () {
     el.id = 'a'+elx.id
     cards.append(el)
   }
-  data[svgx.id][elx.id] = input.value
+  data[svg_id][elx.id] = input.value
   el.innerHTML = `
-    <h3>${svgx.id} ${elx.id}</h3>
+    <h3>${svg_id} ${elx.id}</h3>
     <div>${input.value}</div>
     <button>Edit</button>
   `
   elx.classList.remove('on')
   const edit = el.querySelector('button')
   edit.onclick = () => {
+    const child = svg_box.querySelector('#'+svg_id)
+    const index = Array.prototype.indexOf.call(svg_box.children, child);
+    dots[index].click()
     const target = svg_box.querySelector('#'+el.id.slice(1))
     const event = new MouseEvent('click', {
       bubbles: true,
@@ -153,5 +157,5 @@ function onadd () {
   // submit.scrollIntoView()
 }
 function onsubmit () {
-  console.log('send email!'+data)
+  console.log('send email! '+JSON.stringify(data))
 }
