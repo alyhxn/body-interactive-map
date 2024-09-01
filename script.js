@@ -52,7 +52,7 @@ function dot_click (dot, i) {
     dotx.classList.remove('on')
     dotx = dot
     svgx = svg_box.children[i] 
-    title.innerHTML = svgx.id
+    title.innerHTML = 'Body ' + svgx.id
     svgx.classList.add('show')
     dotx.classList.add('on')
   }
@@ -75,7 +75,6 @@ function r8_click () {
 function l8_click () {
   svgx.classList.remove('show')
   dotx.classList.remove('on')
-  console.log(svgx)
   if(svgx.previousElementSibling){
     svgx = svgx.previousElementSibling
     dotx = dotx.previousElementSibling
@@ -84,8 +83,7 @@ function l8_click () {
     svgx = svg_box.lastElementChild
     dotx = dot_box.lastElementChild
   }
-  console.log(svgx)
-  title.innerHTML = svgx.id
+  title.innerHTML = 'Body ' + svgx.id
   svgx.classList.add('show')
   dotx.classList.add('on')
 }
