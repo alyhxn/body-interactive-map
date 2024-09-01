@@ -1,5 +1,4 @@
-let elx, svgx, dotx
-const data = {}
+let elx, svgx, dotx, data
 const input = document.querySelector('textarea')
 const add = document.querySelector('button')
 const history = document.querySelector('.history')
@@ -9,11 +8,12 @@ const title = document.querySelector('.slider .title')
 const svg_box = document.querySelector('.svg_box')
 const r8_btn = document.querySelector('img.right')
 const l8_btn = document.querySelector('img.left')
-const dots = document.querySelector('.dots')
+const dot_box = document.querySelector('.dots')
+const dots = document.querySelectorAll('.dot')
 const cards_btn = document.querySelector('button#show_cards')
 const close_btn = document.querySelector('button#close')
 
-dotx = dots.firstElementChild
+dotx = dot_box.firstElementChild
 
 const files = ['assets/front-split.svg', 'assets/back-split.svg', 'assets/right-split.svg', 'assets/left-split.svg']
 files.forEach((file, i) => {
@@ -24,7 +24,6 @@ files.forEach((file, i) => {
     svg_box.append(temp.firstElementChild)
     if(!i){
       svgx = svg_box.firstElementChild
-      svgx.classList.add('show')
     }
     
     const paths = svg_box.lastElementChild.querySelectorAll('path')
@@ -32,6 +31,7 @@ files.forEach((file, i) => {
     const polygons = svg_box.lastElementChild.querySelectorAll('polygons')
     paths.forEach(click)
     rects.forEach(click)
+    polygons.forEach(click)
   })
 })
 
@@ -49,6 +49,19 @@ close_btn.onclick = () => {
   history.classList.remove('show')
 }
 // submit.onclick = onsubmit
+dots.forEach(dot_click)
+
+function dot_click (dot, i) {
+  dot.onclick = () => {
+    svgx.classList.remove('show')
+    dotx.classList.remove('on')
+    dotx = dot
+    svgx = svg_box.children[i] 
+    title.innerHTML = svgx.id
+    svgx.classList.add('show')
+    dotx.classList.add('on')
+  }
+}
 r8_btn.onclick = () => {
   svgx.classList.remove('show')
   dotx.classList.remove('on')
@@ -58,22 +71,26 @@ r8_btn.onclick = () => {
   }
   else{
     svgx = svg_box.firstElementChild
-    dotx = dots.firstElementChild
+    dotx = dot_box.firstElementChild
   }
+  title.innerHTML = svgx.id
   svgx.classList.add('show')
   dotx.classList.add('on')
 }
 l8_btn.onclick = () => {
   svgx.classList.remove('show')
   dotx.classList.remove('on')
+  console.log(svgx)
   if(svgx.previousElementSibling){
     svgx = svgx.previousElementSibling
     dotx = dotx.previousElementSibling
   }
   else{
     svgx = svg_box.lastElementChild
-    dotx = dots.lastElementChild
+    dotx = dot_box.lastElementChild
   }
+  console.log(svgx)
+  title.innerHTML = svgx.id
   svgx.classList.add('show')
   dotx.classList.add('on')
 }
@@ -85,9 +102,7 @@ function click (el) {
     if(elx !== el){
       el.classList.add('on')
       elx = el
-      if(el.classList.contains('add')){
-        input.value = data[elx.id]
-      }
+      input.value = el.classList.contains('add') ? data[svgx.id][elx.id] : ''
       input.disabled = false
       input.focus()
       input.placeholder = 'Enter symptoms here'
@@ -99,9 +114,16 @@ function click (el) {
 function onadd () {
   if(!input.value)
     return
-  if(!Object.keys(data).length)
+  if(!data){
     cards.innerHTML = ''
-  if(data[elx.id])
+    data = {
+      front: {},
+      back: {},
+      right: {},
+      left: {}
+    }
+  }
+  if(data[svgx.id][elx.id])
     var el = history.querySelector('#a'+elx.id)
   else{
     var el = document.createElement('div')
@@ -110,23 +132,23 @@ function onadd () {
     el.id = 'a'+elx.id
     cards.append(el)
   }
-  data[elx.id] = input.value
+  data[svgx.id][elx.id] = input.value
   el.innerHTML = `
-    <h2>${elx.id}</h2>
+    <h2>${svgx.id} ${elx.id}</h2>
     <div>${input.value}</div>
     <button>Edit</button>
   `
   elx.classList.remove('on')
   const edit = el.querySelector('button')
   edit.onclick = () => {
-    const target = svg_box.querySelector('#'+el.firstElementChild.innerHTML)
-    console.log(target)
+    const target = svg_box.querySelector('#'+el.id.slice(1))
     const event = new MouseEvent('click', {
       bubbles: true,
       cancelable: true,
       view: window
     });
     target.dispatchEvent(event);
+    history.classList.remove('show')
   }
   elx = null
   input.value = ''

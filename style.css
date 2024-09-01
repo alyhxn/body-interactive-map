@@ -114,6 +114,7 @@ section.history{
   right: 30%;
 }
 .slider h4{
+  text-transform: capitalize;
   margin: 10px;
 }
 .slider img{
@@ -206,5 +207,11 @@ rect.on, path.on, polygon.on{
     background-color: #D73836;
     color: white;
     margin-top: auto;
+  }
+  .slider h4.left{
+    left: 10%;
+  }
+  .slider h4.right{
+    right: 10%;
   }
 }
