@@ -221,9 +221,6 @@ svg.show{
 rect.add, path.add, polygon.add{
   fill: #4EA768;
 }
-rect:hover, path:hover, polygon:hover{
-  fill: #707070;
-}
 rect.on, path.on, polygon.on{
   fill: #5D85CA;
 }
@@ -301,5 +298,12 @@ rect.on, path.on, polygon.on{
   }
   .cards h3{
     font-size: 12px;
+  }
+}
+
+
+@media (hover: hover) {
+  rect:hover, path:hover, polygon:hover{
+    fill: #707070;
   }
 }
