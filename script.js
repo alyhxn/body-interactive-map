@@ -1,5 +1,5 @@
-//Init
 let elx, svgx, dotx, data
+//Init
 const input = document.querySelector('textarea')
 const add = document.querySelector('button')
 const history = document.querySelector('.history')
@@ -14,25 +14,25 @@ const dots = document.querySelectorAll('.dot')
 const cards_btn = document.querySelector('button#show_cards')
 const close_btn = document.querySelector('button#close')
 dotx = dot_box.firstElementChild
-const files = ['assets/front-split.svg', 'assets/back-split.svg', 'assets/right-split.svg', 'assets/left-split.svg']
 
 //fetch svgs
-files.forEach((file, i) => {
-  fetch(file).then(response => response.text())
-  .then(text => {
-    const temp = document.createElement('div')
-    temp.innerHTML = text
-    svg_box.append(temp.firstElementChild)
-    if(!i)
-      svgx = svg_box.firstElementChild
-    const paths = svg_box.lastElementChild.querySelectorAll('path')
-    const rects = svg_box.lastElementChild.querySelectorAll('rect')
-    const polygons = svg_box.lastElementChild.querySelectorAll('polygon')
-    paths.forEach(click)
-    rects.forEach(click)
-    polygons.forEach(click)
-  })
-})
+import('./images.js')
+    .then(module => {
+        const files = module.get_imgs();
+        files.forEach((text, i) => {
+          const temp = document.createElement('div')
+          temp.innerHTML = text
+          svg_box.append(temp.firstElementChild)
+          if(!i)
+            svgx = svg_box.firstElementChild
+          const paths = svg_box.lastElementChild.querySelectorAll('path')
+          const rects = svg_box.lastElementChild.querySelectorAll('rect')
+          const polygons = svg_box.lastElementChild.querySelectorAll('polygon')
+          paths.forEach(click)
+          rects.forEach(click)
+          polygons.forEach(click)
+        })
+    })
 
 //listeners
 add.onclick = onadd
