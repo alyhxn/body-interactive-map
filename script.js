@@ -16,7 +16,7 @@ const close_btn = document.querySelector('button#close')
 dotx = dot_box.firstElementChild
 
 //fetch svgs
-import('./images.js')
+import('./assets/images.js')
     .then(module => {
         const files = module.get_imgs();
         files.forEach((text, i) => {
