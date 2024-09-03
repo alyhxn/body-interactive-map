@@ -1,4 +1,4 @@
-export function get_imgs() {
+function get_imgs() {
   const svgs = [
     `<svg class="show" id="front" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 277.19 659.56">
       <defs>

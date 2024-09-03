@@ -16,23 +16,20 @@ const close_btn = document.querySelector('button#close')
 dotx = dot_box.firstElementChild
 
 //fetch svgs
-import('./assets/images.js')
-    .then(module => {
-        const files = module.get_imgs();
-        files.forEach((text, i) => {
-          const temp = document.createElement('div')
-          temp.innerHTML = text
-          svg_box.append(temp.firstElementChild)
-          if(!i)
-            svgx = svg_box.firstElementChild
-          const paths = svg_box.lastElementChild.querySelectorAll('path')
-          const rects = svg_box.lastElementChild.querySelectorAll('rect')
-          const polygons = svg_box.lastElementChild.querySelectorAll('polygon')
-          paths.forEach(click)
-          rects.forEach(click)
-          polygons.forEach(click)
-        })
-    })
+const files = get_imgs();
+files.forEach((text, i) => {
+  const temp = document.createElement('div')
+  temp.innerHTML = text
+  svg_box.append(temp.firstElementChild)
+  if(!i)
+    svgx = svg_box.firstElementChild
+  const paths = svg_box.lastElementChild.querySelectorAll('path')
+  const rects = svg_box.lastElementChild.querySelectorAll('rect')
+  const polygons = svg_box.lastElementChild.querySelectorAll('polygon')
+  paths.forEach(click)
+  rects.forEach(click)
+  polygons.forEach(click)
+})
 
 //listeners
 add.onclick = onadd
