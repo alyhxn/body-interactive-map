@@ -26,9 +26,12 @@ h2, h3, h4{
   height: 5px;
 }
 ::-webkit-scrollbar-thumb {
-  background: #888;
+  background: transparent;
   border-radius: 5px;
   cursor: pointer;
+}
+:hover::-webkit-scrollbar-thumb{
+  background: #888;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
@@ -153,7 +156,21 @@ button#add:hover{
 .card:focus{
   border-color: #3E75FF;
 }
-.card > div{
+.card > .tags{
+  display: flex;
+  gap: 8px;
+  white-space: nowrap;
+  overflow-x: scroll;
+  line-height: 1.5em;
+  padding: 2px 0;
+}
+.card > .tags span{
+  padding: 3px 5px;
+  background-color: black;
+  color: white;
+  border-radius: 100px;
+}
+.card > .desc{
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;

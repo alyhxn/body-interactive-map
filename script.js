@@ -1,4 +1,4 @@
-let elx, svgx, dotx, data
+let svgx, dotx, data, xcard, els = []
 //Init
 const input = document.querySelector('textarea')
 const add = document.querySelector('button')
@@ -86,19 +86,25 @@ function l8_click () {
 }
 function click (el) {
   el.onclick = () => {
-    elx && elx.classList.remove('on')
-    if(elx !== el){
-      el.classList.add('on')
-      elx = el
-      input.value = ''
+    el.classList.toggle('on')
+    const id = el.parentElement.parentElement.parentElement.id+' '+el.id
+    if(id in els){
+      els = els.filter(v => v !== id)
+      input.disabled = Boolean(els.length)
+      input.placeholder = 'Pick a body part to add symptoms'
+    }
+    else{
+      if(!els.length){
+        input.disabled = false
+        input.placeholder = 'Enter symptoms here'
+      }
+      els.push(id)
+      input.focus()
       if(el.classList.contains('add')){
-        input.value =  data[svgx.id][elx.id]
+        input.value =  data[svgx.id][els.id]
         add.innerHTML = 'update'
       }
-      input.disabled = false
-      input.focus()
-      input.placeholder = 'Enter symptoms here'
-      input.scrollIntoView()
+
     }
   }
 }
@@ -108,37 +114,53 @@ function onadd () {
   add.innerHTML = 'add'
   if(!data){
     cards.innerHTML = ''
-    data = {
-      front: {},
-      back: {},
-      right: {},
-      left: {}
-    }
+    data = []
   }
-  const svg_id = svgx.id
-  const el_id = elx.id
-  if(data[svg_id][elx.id])
-    var el = history.querySelector('#'+svg_id+el_id)
+  const card_id = xcard || 'a'+data.length
+  const body_parts = els
+  const desc = input.value
+  input.value = ''
+  input.disabled = true
+  input.placeholder = 'Pick a body part to add symptoms'
+  els = []
+
+  console.log(xcard)
+  if(xcard)
+    var el = history.querySelector('#'+xcard)
   else{
     var el = document.createElement('div')
+    xcard = null
     el.classList.add('card')
-    elx.classList.add('add')
     el.tabIndex = '-1'
-    el.id = svg_id+el_id
+    el.id = card_id
     cards.append(el)
   }
-  data[svg_id][el_id] = input.value
+  data = data.filter(card => card.id !== card_id)
+  data.push({
+    id: card_id,
+    body_parts,
+    desc
+  })
   el.innerHTML = `
-    <h3>${svg_id} ${el_id}</h3>
-    <div>${input.value}</div>
+    <div class='tags'>${body_parts.map(id => `<span>${id}</span>`).join('')}</div>
+    <div class='desc'>${desc}</div>
     <button>Edit</button>
   `
-  elx.classList.remove('on')
   const edit = el.querySelector('button')
-  edit.onclick = () => {
-    const child = svg_box.querySelector('#'+svg_id)
-    const index = Array.prototype.indexOf.call(svg_box.children, child);
-    dots[index].click()
+  edit.onclick = () => onedit({card_id, body_parts, desc})
+  body_parts.forEach(part => {
+    const [svg_id, el_id] = part.split(' ')
+    svg_box.querySelector('#'+svg_id+' #'+el_id).classList.remove('on')
+  })
+}
+function onedit({card_id, body_parts, desc}) {
+  els.forEach(part => {
+    const [svg_id, el_id] = part.split(' ')
+    svg_box.querySelector('#'+svg_id+' #'+el_id).classList.remove('on')
+  })
+  xcard = card_id
+  body_parts.forEach(part => {
+    const [svg_id, el_id] = part.split(' ')
     const target = svg_box.querySelector('#'+svg_id+' #'+el_id)
     const event = new MouseEvent('click', {
       bubbles: true,
@@ -146,13 +168,8 @@ function onadd () {
       view: window
     });
     target.dispatchEvent(event);
-    history.classList.remove('show')
-  }
-  elx = null
-  input.value = ''
-  input.disabled = true
-  input.placeholder = 'Pick a body part to add symptoms'
-  // submit.scrollIntoView()
+  })
+  input.value = desc
 }
 function onsubmit () {
   console.log('send email:\n'+JSON.stringify(data, null, 2))
