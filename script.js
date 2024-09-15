@@ -99,12 +99,6 @@ function click (el) {
         input.placeholder = 'Enter symptoms here'
       }
       els.push(id)
-      input.focus()
-      if(el.classList.contains('add')){
-        input.value =  data[svgx.id][els.id]
-        add.innerHTML = 'update'
-      }
-
     }
   }
 }
@@ -168,6 +162,7 @@ function onedit({card_id, body_parts, desc}) {
       view: window
     });
     target.dispatchEvent(event);
+    history.classList.remove('show')
   })
   input.value = desc
 }
