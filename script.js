@@ -1,8 +1,8 @@
-let svgx, dotx, data, xcard, els = []
+let svgx, dotx, els = []
 //Init
 const input = document.querySelector('textarea')
 const history = document.querySelector('.history')
-const cards = document.querySelector('.cards')
+const form = history.querySelector('form')
 const submit = document.querySelector('#submit')
 const title = document.querySelector('.slider .title')
 const svg_box = document.querySelector('.svg_box')
@@ -31,7 +31,7 @@ files.forEach((text, i) => {
 })
 
 //listeners
-input.onkeydown = e => {e.key === 'Enter' && submit()}
+// input.onkeydown = e => {e.key === 'Enter' && onsubmit(e)}
 cards_btn.onclick = () => history.classList.add('show')
 close_btn.onclick = () => history.classList.remove('show')
 submit.onclick = onsubmit
@@ -100,6 +100,45 @@ function click (el) {
     }
   }
 }
-function onsubmit () {
-  console.log('send email:\n'+JSON.stringify(data, null, 2))
+function onsubmit (e) {
+  // Fill the report with form data
+  e.preventDefault()
+  const firstname = document.getElementById('firstname').value;
+  const lastname = document.getElementById('lastname').value;
+  const email = document.getElementById('email').value;
+  const desc = document.getElementById('desc').value;
+
+  if(!form.checkValidity()){
+    form.reportValidity()
+    return
+  }
+
+  report.querySelector('#report-name').innerText = firstname + ' ' + lastname;
+  report.querySelector('#report-email').innerText = email;
+  report.querySelector('#report-desc').innerText = desc;
+  const reportImages = report.querySelector('#report-images');
+  reportImages.innerHTML = svg_box.innerHTML
+  // Generate and download the image
+  html2canvas(report).then(function(canvas) {
+    const link = document.createElement('a');
+    link.href = canvas.toDataURL('image/png');
+    link.download = 'medical-report.png';
+    link.click();
+  });
 }
+const report = document.createElement('div')
+report.id = 'report'
+document.body.append(report)
+report.innerHTML = `
+  <h1>Medical Report</h1>
+  <div class="details">
+    <div><strong>Name:</strong> <span id="report-name"></span></div>
+    <div><strong>Email:</strong> <span id="report-email"></span></div>
+  </div>
+  <div class="description">
+    <strong>Description:</strong> <span id="report-desc"></span>
+  </div>
+  <div class="images" id="report-images">
+    <!-- SVG images will be added here -->
+  </div>
+`
