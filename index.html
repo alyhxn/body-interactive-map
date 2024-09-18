@@ -32,32 +32,26 @@
     <img class="right" src="assets/right_arrow.svg" alt="right_arrow">
   </section>
   <main>
+    <section class="history">
+      <form>
+        <div>
+          <input placeholder="First name" name="name" type="text">
+          <input placeholder="Last name" name="name" type="text">
+        </div>
+        <input placeholder="Email" name="email" type="email">
+        <div class="fixed">
+          <button id="close">Close</button>
+          <button id="submit">
+            Submit
+          </button>
+        </div>
+      </form>
+    </section>
     <section>
       <textarea disabled placeholder="Pick a body part to add symptoms" type="text"></textarea>
-      <button id="add">
-        Add
-      </button>
       <button id="show_cards">
-        Show Added Symptoms
+        Next
       </button>
-    </section>
-    <section class="history">
-      <div class="box">
-        <h2>
-          Your symptoms
-        </h2>
-        <div class="cards">
-          <h3>
-            Nothing to show
-          </h3>
-        </div>
-      </div>
-      <div class="fixed">
-        <button id="close">Close</button>
-        <button id="submit">
-          Submit
-        </button>
-      </div>
     </section>
   </main>
 

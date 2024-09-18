@@ -1,7 +1,6 @@
 let svgx, dotx, data, xcard, els = []
 //Init
 const input = document.querySelector('textarea')
-const add = document.querySelector('button')
 const history = document.querySelector('.history')
 const cards = document.querySelector('.cards')
 const submit = document.querySelector('#submit')
@@ -32,8 +31,7 @@ files.forEach((text, i) => {
 })
 
 //listeners
-add.onclick = onadd
-input.onkeydown = e => {e.key === 'Enter' && onadd()}
+input.onkeydown = e => {e.key === 'Enter' && submit()}
 cards_btn.onclick = () => history.classList.add('show')
 close_btn.onclick = () => history.classList.remove('show')
 submit.onclick = onsubmit
@@ -101,70 +99,6 @@ function click (el) {
       els.push(id)
     }
   }
-}
-function onadd () {
-  if(!input.value)
-    return
-  add.innerHTML = 'add'
-  if(!data){
-    cards.innerHTML = ''
-    data = []
-  }
-  const card_id = xcard || 'a'+data.length
-  const body_parts = els
-  const desc = input.value
-  input.value = ''
-  input.disabled = true
-  input.placeholder = 'Pick a body part to add symptoms'
-  els = []
-
-  console.log(xcard)
-  if(xcard)
-    var el = history.querySelector('#'+xcard)
-  else{
-    var el = document.createElement('div')
-    xcard = null
-    el.classList.add('card')
-    el.tabIndex = '-1'
-    el.id = card_id
-    cards.append(el)
-  }
-  data = data.filter(card => card.id !== card_id)
-  data.push({
-    id: card_id,
-    body_parts,
-    desc
-  })
-  el.innerHTML = `
-    <div class='tags'>${body_parts.map(id => `<span>${id}</span>`).join('')}</div>
-    <div class='desc'>${desc}</div>
-    <button>Edit</button>
-  `
-  const edit = el.querySelector('button')
-  edit.onclick = () => onedit({card_id, body_parts, desc})
-  body_parts.forEach(part => {
-    const [svg_id, el_id] = part.split(' ')
-    svg_box.querySelector('#'+svg_id+' #'+el_id).classList.remove('on')
-  })
-}
-function onedit({card_id, body_parts, desc}) {
-  els.forEach(part => {
-    const [svg_id, el_id] = part.split(' ')
-    svg_box.querySelector('#'+svg_id+' #'+el_id).classList.remove('on')
-  })
-  xcard = card_id
-  body_parts.forEach(part => {
-    const [svg_id, el_id] = part.split(' ')
-    const target = svg_box.querySelector('#'+svg_id+' #'+el_id)
-    const event = new MouseEvent('click', {
-      bubbles: true,
-      cancelable: true,
-      view: window
-    });
-    target.dispatchEvent(event);
-    history.classList.remove('show')
-  })
-  input.value = desc
 }
 function onsubmit () {
   console.log('send email:\n'+JSON.stringify(data, null, 2))
