@@ -117,7 +117,14 @@ function onsubmit (e) {
   report.querySelector('#report-email').innerText = email;
   report.querySelector('#report-desc').innerText = desc;
   const reportImages = report.querySelector('#report-images');
-  reportImages.innerHTML = svg_box.innerHTML
+  const labels = ['Front', 'Back', 'Left', 'Right']
+  Array.from(reportImages.children).forEach((child, i) => {
+    child.innerHTML = svg_box.children[i].outerHTML
+    const label = document.createElement('div')
+    label.classList.add('label')
+    label.innerHTML = labels[i]
+    child.append(label)
+  })
   // Generate and download the image
   html2canvas(report).then(function(canvas) {
     const link = document.createElement('a');
@@ -139,6 +146,6 @@ report.innerHTML = `
     <strong>Description:</strong> <span id="report-desc"></span>
   </div>
   <div class="images" id="report-images">
-    <!-- SVG images will be added here -->
+    <div></div><div></div><div></div><div></div>
   </div>
 `

@@ -294,6 +294,14 @@ h1 {
   margin-top: 20px;
   height: 800px;
 }
-.images > svg{
+.images > div{
+  overflow: hidden;
+}
+.images .label{
+  text-align: center;
+  margin-top: 10px;
+}
+.images svg{
   display: block;
+  height: 96%;
 }
