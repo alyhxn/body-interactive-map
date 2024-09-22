@@ -238,9 +238,6 @@ rect.on, path.on, polygon.on{
   .slider .svg_box{
     margin-top: 20px;
   }
-  .slider .title{
-    display: none;
-  }
   .slider img{
     width: 38px;
     height: 38px;
@@ -255,48 +252,48 @@ rect.on, path.on, polygon.on{
 
 
 
-    #report {
-      position: absolute;
-      background-color: #fff;
-      left: -2000px;
-      width: 1600px;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    }
-    #report.show{
-      display: block;
-    }
-    h1 {
-      text-align: center;
-      color: #333;
-    }
-    .details {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 20px;
-    }
-    .details div {
-      width: 48%;
-      padding: 10px;
-      background-color: #f0f0f0;
-      border-radius: 5px;
-      color: #555;
-    }
-    .description {
-      background-color: #f0f0f0;
-      padding: 10px;
-      border-radius: 5px;
-      margin-bottom: 20px;
-      color: #555;
-    }
-    .images {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 10px;
-      margin-top: 20px;
-      height: 800px;
-    }
-    .images > svg{
-      display: block;
-    }
+#report {
+  position: absolute;
+  background-color: #fff;
+  left: -2000px;
+  width: 1600px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+#report.show{
+  display: block;
+}
+h1 {
+  text-align: center;
+  color: #333;
+}
+.details {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.details div {
+  width: 48%;
+  padding: 10px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  color: #555;
+}
+.description {
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  color: #555;
+}
+.images {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+  margin-top: 20px;
+  height: 800px;
+}
+.images > svg{
+  display: block;
+}

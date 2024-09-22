@@ -85,19 +85,19 @@ function l8_click () {
 function click (el) {
   el.onclick = () => {
     el.classList.toggle('on')
-    const id = el.parentElement.parentElement.parentElement.id+' '+el.id
-    if(id in els){
-      els = els.filter(v => v !== id)
-      input.disabled = Boolean(els.length)
-      input.placeholder = 'Pick a body part to add symptoms'
-    }
-    else{
-      if(!els.length){
-        input.disabled = false
-        input.placeholder = 'Enter symptoms here'
-      }
-      els.push(id)
-    }
+    // const id = el.parentElement.parentElement.parentElement.id+' '+el.id
+    // if(id in els){
+    //   els = els.filter(v => v !== id)
+    //   input.disabled = Boolean(els.length)
+    //   input.placeholder = 'Pick a body part to add symptoms'
+    // }
+    // else{
+    //   if(!els.length){
+    //     input.disabled = false
+    //     input.placeholder = 'Enter symptoms here'
+    //   }
+    //   els.push(id)
+    // }
   }
 }
 function onsubmit (e) {
