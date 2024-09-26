@@ -112,6 +112,10 @@ function onsubmit (e) {
     form.reportValidity()
     return
   }
+  if(!input.checkValidity()){
+    input.reportValidity()
+    return
+  }
 
   report.querySelector('#report-name').innerText = firstname + ' ' + lastname;
   report.querySelector('#report-email').innerText = email;

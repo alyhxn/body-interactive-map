@@ -51,6 +51,7 @@ section{
   height: 100%;
   width: 100%;
   padding: 10px;
+  position: relative;
   border: 1px solid rgb(163, 163, 163);
 }
 textarea{
@@ -82,7 +83,6 @@ button:hover{
   background-color: #F3F3F3;
   display: block;
   padding: 0;
-  position: relative;
   border-left: 1px solid #3E75FF;
 }
 .history .fixed{
@@ -114,11 +114,13 @@ button:hover{
   margin: 6px 0;
   width: 100%;
 }
+.history .title{
+  display: none;
+}
 .slider{
   background-color: #F3F3F3;
   height: 70vh;
   gap: 10px;
-  position: relative;
   padding: 15px 0;
 }
 .slider h4.left{
@@ -205,22 +207,35 @@ rect.on, path.on, polygon.on{
     height: 100vh;
     z-index: 1;
     align-items: flex-start;
-    justify-content: flex-start;
+    justify-content: center;
     background-color: white;
     top: 0;
     left: 0;
     border: none;
   }
+  .history .fixed{
+    position: static;
+  }
+  .history .title{
+    display: block;
+    text-align: center;
+    margin: 15px;
+  }
   textarea{
-    padding: 0;
+    padding: 0 0 70px 0;
   }
   button{
     font-size: 12px;
   }
+  .info{
+    padding: 2px 0 10px 10px;
+  }
   #show_cards{
     display: block;
-    color: #3566CF;
-    box-shadow: none;
+    background-color: #3566CF;
+    color: white;
+    margin: -60px 10px 0 0;
+    width: 97%;
   }
   #close{
     display: block;
