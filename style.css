@@ -126,12 +126,12 @@ button:hover{
 .slider h4.left{
   position: absolute;
   top: 10vh;
-  left: 30%;
+  right: 30%;
 }
 .slider h4.right{
   position: absolute;
   top: 10vh;
-  right: 30%;
+  left: 30%;
 }
 .slider h4{
   text-transform: capitalize;
@@ -242,13 +242,16 @@ rect.on, path.on, polygon.on{
     background-color: #D73836;
     color: white;
   }
+  .slider{
+    height: 77vh;
+  }
   .slider h4.left{
     top: 4vh;
-    left: 10%;
+    right: 10%;
   }
   .slider h4.right{
     top: 4vh;
-    right: 10%;
+    left: 10%;
   }
   .slider .svg_box{
     margin-top: 20px;
@@ -256,7 +259,7 @@ rect.on, path.on, polygon.on{
   .slider img{
     width: 38px;
     height: 38px;
-    padding: 5px;
+    padding: 7px;
   }
 }
 @media (hover: hover) {

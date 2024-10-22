@@ -1,10 +1,15 @@
-let svgx, dotx, els = []
+let svgx, dotx, els = [], count = 0
+const labels = [
+  ['Right', 'Left'], ['Right', 'Left'], ['Back', 'Front'], ['Front', 'Back']
+]
 //Init
 const input = document.querySelector('textarea')
 const history = document.querySelector('.history')
 const form = history.querySelector('form')
 const submit = document.querySelector('#submit')
 const title = document.querySelector('.slider .title')
+const left_label = document.querySelector('.slider .left')
+const right_label = document.querySelector('.slider .right')
 const svg_box = document.querySelector('.svg_box')
 const r8_btn = document.querySelector('img.right')
 const l8_btn = document.querySelector('img.left')
@@ -56,14 +61,18 @@ function r8_click () {
   svgx.classList.remove('show')
   dotx.classList.remove('on')
   if(svgx.nextElementSibling){
+    count++
     svgx = svgx.nextElementSibling
     dotx = dotx.nextElementSibling
   }
   else{
+    count = 0
     svgx = svg_box.firstElementChild
     dotx = dot_box.firstElementChild
   }
   title.innerHTML = 'Body ' + svgx.id
+  left_label.innerHTML = labels[count][1]
+  right_label.innerHTML = labels[count][0]
   svgx.classList.add('show')
   dotx.classList.add('on')
 }
@@ -71,14 +80,18 @@ function l8_click () {
   svgx.classList.remove('show')
   dotx.classList.remove('on')
   if(svgx.previousElementSibling){
+    count--
     svgx = svgx.previousElementSibling
     dotx = dotx.previousElementSibling
   }
   else{
+    count = 3
     svgx = svg_box.lastElementChild
     dotx = dot_box.lastElementChild
   }
   title.innerHTML = 'Body ' + svgx.id
+  left_label.innerHTML = labels[count][1]
+  right_label.innerHTML = labels[count][0]
   svgx.classList.add('show')
   dotx.classList.add('on')
 }
@@ -110,10 +123,6 @@ function onsubmit (e) {
 
   if(!form.checkValidity()){
     form.reportValidity()
-    return
-  }
-  if(!input.checkValidity()){
-    input.reportValidity()
     return
   }
 
